@@ -46,7 +46,7 @@ namespace Hahn.ApplicatonProcess.July2021.Domain.Services
             var assets = await _assetService.GetAssetsFromJsonFile();
             user.AssetName.ForEach(asset =>
             {
-                if (!assets.Where(x => x.Name.ToLower() == asset.ToLower() && x.Id.ToLower() == asset.ToLower()).Any())
+                if (!assets.Where(x => x.Name.ToLower() == asset.ToLower() || x.Id.ToLower() == asset.ToLower()).Any())
                     throw new BussinessException("Asset not Found", 404);
             });
 
