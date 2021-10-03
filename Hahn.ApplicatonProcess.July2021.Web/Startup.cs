@@ -1,7 +1,11 @@
+using Hahn.ApplicatonProcess.July2021.Data.Data;
+using Hahn.ApplicatonProcess.July2021.Data.Repositories;
+using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +36,13 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hahn.ApplicatonProcess.July2021.Web", Version = "v1" });
             });
+
+            //DbContext Configuration
+            services.AddDbContext<HahnProcessContext>(options => options.UseInMemoryDatabase("AppDb"));
+
+            //Services Dependency Injection
+            services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
