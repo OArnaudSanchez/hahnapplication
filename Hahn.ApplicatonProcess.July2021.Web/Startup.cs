@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Hahn.ApplicatonProcess.July2021.Data.Data;
 using Hahn.ApplicatonProcess.July2021.Data.DataAccess;
+using Hahn.ApplicatonProcess.July2021.Data.Filters;
 using Hahn.ApplicatonProcess.July2021.Data.Options;
 using Hahn.ApplicatonProcess.July2021.Data.Repositories;
 using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
@@ -34,7 +35,13 @@ namespace Hahn.ApplicatonProcess.July2021.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>())
+            .AddNewtonsoftJson(options => 
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hahn.ApplicatonProcess.July2021.Web", Version = "v1" });
@@ -53,8 +60,10 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             services.Configure<ResourcesOptions>(Configuration.GetSection("Resources"));
 
             //Fluent Validation
-            services.AddMvc()
-                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+            services.AddMvc(options => {
+                options.Filters.Add<ValidationFilter>();
+            })
+            .AddFluentValidation(options => options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
             //AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
