@@ -1,4 +1,6 @@
 using Hahn.ApplicatonProcess.July2021.Data.Data;
+using Hahn.ApplicatonProcess.July2021.Data.DataAccess;
+using Hahn.ApplicatonProcess.July2021.Data.Options;
 using Hahn.ApplicatonProcess.July2021.Data.Repositories;
 using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -43,6 +45,11 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             //Services Dependency Injection
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IDataAcess, HttpDataAccess>();
+
+            //Options Settings
+            services.Configure<AssetsOptions>(Configuration.GetSection("Assets"));
+            services.Configure<ResourcesOptions>(Configuration.GetSection("Resources"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
