@@ -57,7 +57,7 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             services.AddTransient<IDataAcess, HttpDataAccess>();
             services.AddTransient<IAssetService, AssetService>();
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IUserAssetService, IUserAssetService>();
+            services.AddTransient<IUserAssetService, UserAssetService>();
 
             //Options Settings
             services.Configure<AssetsOptions>(Configuration.GetSection("Assets"));

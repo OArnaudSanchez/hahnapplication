@@ -66,8 +66,8 @@ namespace Hahn.ApplicatonProcess.July2021.Domain.Services
 
             var currentUser = await GetUser(user.Id);
             await _unitOfWork.UserRepository.Update(user);
-            await _userAssetService.UpdateUserAsset(user.AssetName, user.Id);
             await _unitOfWork.SaveChangesAsync();
+            await _userAssetService.UpdateUserAsset(user.AssetName, user.Id);
 
             return true;
         }

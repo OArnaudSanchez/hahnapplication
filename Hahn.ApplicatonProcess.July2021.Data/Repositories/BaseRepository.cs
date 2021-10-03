@@ -38,7 +38,7 @@ namespace Hahn.ApplicatonProcess.July2021.Data.Repositories
         public async Task<bool> Update(T Entity)
         {
             var currentEntity = await GetById(Entity.Id);
-            _entities.Update(currentEntity);
+            _entities.Update(Entity);
             return true;
         }
         public async Task<bool> Delete(int id)
