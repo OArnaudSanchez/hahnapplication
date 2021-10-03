@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Hahn.ApplicatonProcess.July2021.Data.Data;
 using Hahn.ApplicatonProcess.July2021.Data.DataAccess;
 using Hahn.ApplicatonProcess.July2021.Data.Options;
@@ -50,6 +51,14 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             //Options Settings
             services.Configure<AssetsOptions>(Configuration.GetSection("Assets"));
             services.Configure<ResourcesOptions>(Configuration.GetSection("Resources"));
+
+            //Fluent Validation
+            services.AddMvc()
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
+            //AutoMapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
