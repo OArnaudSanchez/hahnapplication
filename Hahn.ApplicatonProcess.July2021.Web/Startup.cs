@@ -5,6 +5,7 @@ using Hahn.ApplicatonProcess.July2021.Data.Filters;
 using Hahn.ApplicatonProcess.July2021.Data.Options;
 using Hahn.ApplicatonProcess.July2021.Data.Repositories;
 using Hahn.ApplicatonProcess.July2021.Domain.Interfaces;
+using Hahn.ApplicatonProcess.July2021.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -54,6 +55,9 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IDataAcess, HttpDataAccess>();
+            services.AddTransient<IAssetService, AssetService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserAssetService, IUserAssetService>();
 
             //Options Settings
             services.Configure<AssetsOptions>(Configuration.GetSection("Assets"));
