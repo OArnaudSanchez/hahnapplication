@@ -18,7 +18,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Hahn.ApplicatonProcess.July2021.Web
@@ -46,6 +48,9 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hahn.ApplicatonProcess.July2021.Web", Version = "v1" });
+                var xml = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xml);
+                c.IncludeXmlComments(xmlPath);
             });
 
             //DbContext Configuration
