@@ -71,6 +71,9 @@ namespace Hahn.ApplicatonProcess.July2021.Web
 
             //AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //coors
+            services.AddCors();
         
         }
 
@@ -87,6 +90,8 @@ namespace Hahn.ApplicatonProcess.July2021.Web
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.WithOrigins("*").WithMethods("*").WithHeaders("*"));
 
             app.UseAuthorization();
 
