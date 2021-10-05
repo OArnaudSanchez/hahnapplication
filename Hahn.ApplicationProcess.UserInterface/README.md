@@ -1,8 +1,8 @@
-# `Hahn.ApplicationProcess.UserInterface`
-
-This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
-
-For more information, go to https://aurelia.io/docs/cli/webpack
+#  Instalation Process
+# 1- Install all packages y both projects (Front Y Backend)
+# 2- You can run the backend using visual studio debugger or With docker with command docker run -dp portNumber:portNumber
+# 3- Type npm start in the ui project
+# 4- Make sure that the url of the api that is in the file src / services / axiosConfig.ts be the same as running the backend.
 
 ## Run dev app
 
