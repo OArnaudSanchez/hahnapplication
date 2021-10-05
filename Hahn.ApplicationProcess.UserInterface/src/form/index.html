@@ -1,0 +1,67 @@
+<template>
+    <div class="container mt-4">
+        <div class="row">
+          <div class="col">
+            <form class="row g-3" role="form">
+              <div class="col-md-6 form-group">
+                <div validation-errors.bind="FirstNameErrors">
+                  <label class="form-label">First Name</label>
+                  <input type="text" value.bind="user.FirstName & validate" class="form-control" required />
+                  <span class="help-block text-danger label label-danger" repeat.for="errorInfo of FirstNameErrors">${ errorInfo.error.message }</span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <div validation-errors.bind="LastNameErrors">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" value.bind="user.LastName & validate" class="form-control" required />
+                  <span class="help-block text-danger label label-danger" repeat.for="errorInfo of LastNameErrors">${ errorInfo.error.message }</span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group" >
+                <div validation-errors.bind="AddressErrors">
+                  <label for="inputAddress" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputAddress"
+                    placeholder="Ex: 8400 NW 25th Street Suite 100, FL 33198-1534"
+                     required
+                    value.bind="user.Address & validate"
+                  />
+                  <span class="help-block text-danger label label-danger" repeat.for="errorInfo of AddressErrors">${ errorInfo.error.message }</span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group" >
+                <div validation-errors.bind="AgeErrors">
+                  <label class="form-label">Age</label>
+                  <input type="number" value.bind="user.Age & validate" class="form-control"  required/>
+                  <span class="help-block text-danger label label-danger" repeat.for="errorInfo of AgeErrors">${ errorInfo.error.message }</span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group" >
+                <div validation-errors.bind="EmailErrors">
+                  <label class="form-label">Email</label>
+                  <input type="email" value.bind="user.Email & validate" class="form-control" required />
+                  <span class="help-block text-danger label label-danger" repeat.for="errorInfo of EmailErrors">${ errorInfo.error.message }</span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <div validation-errors.bind="assetnameErrors">
+                  <label class="form-label">Assets</label>
+                  <select class="form-select" multiple value.bind="assetname & validate" required>
+                    <option value.bind="asset.id & validate" repeat.for="asset of user.Assets">${asset.name}</option>
+                  </select>
+                  <span class="help-block text-danger label label-danger" repeat.for="errorInfo of assetnameErrors">${ errorInfo.error.message }</span>
+                </div>
+
+                </div>
+              </div>
+              <div class="col-12">
+                <button click.delegate="submitData()" class="btn btn-success" disabled.bind="!isValid || controller.errors.length > 0">Send</button>
+                <button click.delegate="reset()" disabled.bind="!isValid" class="btn btn-primary">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</template>
