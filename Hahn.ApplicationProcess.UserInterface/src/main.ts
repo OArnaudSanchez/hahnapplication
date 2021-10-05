@@ -7,7 +7,13 @@ export function configure(aurelia: Aurelia): void {
     .standardConfiguration()
     .feature(PLATFORM.moduleName('resources/index'));
 
+    aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
+    aurelia.start().then(() => aurelia.setRoot());
+
   aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-validation'));
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-dialog'));
+ 
 
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
@@ -15,3 +21,4 @@ export function configure(aurelia: Aurelia): void {
 
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }
+
