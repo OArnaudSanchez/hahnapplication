@@ -1,0 +1,26 @@
+<template>
+   <style>
+      div.div{
+         border:1px solid #959ca3;
+         padding: 15px;
+         background-color: #f7f7f7;
+         border-radius: 10px;
+      }
+      .cancel{
+         float: right
+      }
+   </style>
+   <div class="div">
+      <div>
+         <h1>${ title }</h1>
+      </div>
+      <div>
+         <p>${ message }</p>
+      </div>
+
+      <div>
+         <button click.trigger="ok()" class="btn btn-success">Ok</button>
+         <button click.trigger="cancel()" class="btn btn-primary cancel">Cancel</button>
+      </div>
+   </div>
+ </template>

@@ -1,0 +1,25 @@
+<template>
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="card mt-2" style="width: 18rem;">
+                    <div class="card-body" style="background-color: #959ca3;">
+                      <h5 class="card-title text-center">User Profile</h5>
+                      <p>ID: ${user.id}</p>
+                      <p>Name: ${ user.firstName } ${ user.lastName }</p>
+                      <p>Email: ${user.email}</p>
+                      <p>Age:  ${user.age}</p>
+                      <p>Address: ${user.address}</p>
+                      <strong>Assets</strong>
+                      <ul>
+                          <li repeat.for="asset of user.assets">
+                              ${asset.name} (${asset.symbol})
+                          </li>
+                      </ul>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</template>
