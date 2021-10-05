@@ -83,8 +83,11 @@ namespace Hahn.ApplicatonProcess.July2021.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            var logPath = Directory.GetCurrentDirectory();
+            loggerFactory.AddFile($"{logPath}\\Logs\\{Configuration.GetValue<string>("Log:LogName")}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
